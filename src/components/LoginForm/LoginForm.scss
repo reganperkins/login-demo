@@ -1,0 +1,142 @@
+@import '../../common-styles/variables.scss';
+@import '../../common-styles/animations.scss';
+
+.login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 350px;
+  padding: 30px 30px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  span {
+    position: relative;
+    + * {
+      margin-top: 10px;
+    }
+  }
+  input {
+    width: 100%;
+    font-size: 1em;
+    box-sizing: border-box;
+    padding: 20px 40px 15px 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    &:focus,
+    &:not(:placeholder-shown) {
+      + label {
+        left: 0;
+        transform: scale(.75) translate(10px);
+      }
+    }
+    &:focus,
+    &:hover {
+      ~ .icon {
+        opacity: 1;
+      }
+    }
+  }
+  label {
+    position: absolute;
+    top: 3px;
+    left: 15px;
+    transform: translateY(12px);
+    transition: all .3s ease;
+  }
+  .icon {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    opacity: .4;
+    transition: opacity .5s ease;
+  }
+  button {
+    position: relative;
+    background: none;
+    border: 1px solid $primary;
+    height: 50px;
+    color: $primary;
+    outline: none;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: color .3s ease-in-out;
+    span {
+      z-index: 1;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0px;
+      bottom: 0px;
+      width: 100%;
+      height: 0%;
+      border-radius: 6px;
+      background: $primary;
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      color: #fff;
+      &:after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: $primary;
+      }
+      &:active:after {
+        box-sizing: border-box;
+        background: $dark;
+        box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
+        transition: all 250ms linear;
+      }
+    }
+    
+    &:active {
+      color: scale-color($primary, $lightness: 70%);
+      text-decoration: none;
+      text-shadow: -1px -1px 0 scale-color($dark, $lightness: -30%);
+      transition: all 250ms linear;
+    }
+  }
+  form.success button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-self: center;
+    border: 1px solid $green;
+    animation: pulse .7s ease-in-out;
+    &:before {
+      content: '';
+      height: 25px;
+      width: 10px;
+      display: block;
+      transform: rotate(45deg) translate(4px, -11px);
+      border-bottom: 3px solid $green;
+      border-right: 3px solid $green;
+      opacity: 0;
+      animation: appear .1s .2s forwards;
+    }
+    span,
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.invalid {
+  animation: shake .4s cubic-bezier(.36,.07,.19,.97);
+  input {
+    border-color: $error;
+  }
+}
