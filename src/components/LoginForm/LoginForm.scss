@@ -15,52 +15,52 @@
     display: flex;
     flex-direction: column;
   }
-  span {
-    position: relative;
-    + * {
-      margin-top: 10px;
-    }
-  }
-  input {
-    width: 100%;
-    font-size: 1em;
-    box-sizing: border-box;
-    padding: 20px 40px 15px 15px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    background: #f9f9f9;
-    &:focus,
-    &:active {
-      outline: none;
-    }
-    &:focus,
-    &:not(:placeholder-shown) {
-      + label {
-        left: 0;
-        transform: scale(.75) translate(10px);
-      }
-    }
-    &:focus,
-    &:hover {
-      ~ .icon {
-        opacity: 1;
-      }
-    }
-  }
-  label {
-    position: absolute;
-    top: 3px;
-    left: 15px;
-    transform: translateY(12px);
-    transition: all .3s ease;
-  }
-  .icon {
-    position: absolute;
-    top: 18px;
-    right: 15px;
-    opacity: .4;
-    transition: opacity .5s ease;
-  }
+  // span {
+  //   position: relative;
+  //   + * {
+  //     margin-top: 10px;
+  //   }
+  // }
+  // input {
+  //   width: 100%;
+  //   font-size: 1em;
+  //   box-sizing: border-box;
+  //   padding: 20px 40px 15px 15px;
+  //   border-radius: 8px;
+  //   border: 1px solid #eee;
+  //   background: #f9f9f9;
+  //   &:focus,
+  //   &:active {
+  //     outline: none;
+  //   }
+  //   &:focus,
+  //   &:not(:placeholder-shown) {
+  //     + label {
+  //       left: 0;
+  //       transform: scale(.75) translate(10px);
+  //     }
+  //   }
+  //   &:focus,
+  //   &:hover {
+  //     ~ .icon {
+  //       opacity: 1;
+  //     }
+  //   }
+  // }
+  // label {
+  //   position: absolute;
+  //   top: 3px;
+  //   left: 15px;
+  //   transform: translateY(12px);
+  //   transition: all .3s ease;
+  // }
+  // .icon {
+  //   position: absolute;
+  //   top: 18px;
+  //   right: 15px;
+  //   opacity: .4;
+  //   transition: opacity .5s ease;
+  // }
   button {
     position: relative;
     background: none;
@@ -134,9 +134,9 @@
   }
 }
 
-.invalid {
-  animation: shake .4s cubic-bezier(.36,.07,.19,.97);
-  input {
-    border-color: $error;
-  }
-}
+// .invalid {
+//   animation: shake .4s cubic-bezier(.36,.07,.19,.97);
+//   input {
+//     border-color: $error;
+//   }
+// }
