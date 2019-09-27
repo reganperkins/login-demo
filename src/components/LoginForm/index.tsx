@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import './LoginForm.scss';
 import WrappedInput from '../WrappedInput';
 import { get } from '../../utils/helper-functions';
 
-const LoginForm: React.SFC = () => {
+const LoginForm: React.SFC<RouteComponentProps> = (props) => {
   const [ invalidFields, setInvalidFields ] = React.useState(false);
   const [ submitSuccess, setSubmitSuccess ] = React.useState(false);
 
@@ -12,17 +13,53 @@ const LoginForm: React.SFC = () => {
   const passwordInput = React.createRef<HTMLInputElement>();
 
 
-  const handleSubmit = () => {
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     let email = get(emailInput, 'current.value');
     const password = get(passwordInput, 'current.value');
 
-    if (email !== 'test@test.com' || password !== 'test') {
-      setInvalidFields(true);
-      return false;
-    }
-    setInvalidFields(false);
-    setSubmitSuccess(true);
+    fetch('/api/authenticate', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        console.log('success', props)
+        setInvalidFields(false);
+        setSubmitSuccess(true);
+        setTimeout(() => props.history.push('/'), 400);
+      } else {
+        setInvalidFields(false);
+        setSubmitSuccess(true);
+        // const error = new Error(res.error);
+        // throw error;
+        throw 'error';
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      // alert('Error logging in please try again');
+    });
   }
+
+  // const handleSubmit = () => {
+  //   let email = get(emailInput, 'current.value');
+  //   const password = get(passwordInput, 'current.value');
+
+  //   if (email !== 'test@test.com' || password !== 'test') {
+  //     setInvalidFields(true);
+  //     return false;
+  //   }
+  //   setInvalidFields(false);
+  //   setSubmitSuccess(true);
+  // }
 
   const handleKeyUp = () => {
     if (invalidFields) {
@@ -72,4 +109,4 @@ const LoginForm: React.SFC = () => {
   );
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

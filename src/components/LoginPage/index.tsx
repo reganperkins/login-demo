@@ -2,7 +2,8 @@ import React from 'react';
 import './LoginPage.scss';
 import LoginForm from '../LoginForm';
 
-const LoginPage: React.FC = () => {
+
+const LoginPage: React.SFC = () => {
   return (
     <React.Fragment>
       <div className="top-banner">

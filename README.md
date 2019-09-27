@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+node server.js
+npm start
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ## Available Scripts
 
