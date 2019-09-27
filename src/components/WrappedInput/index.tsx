@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconName } from '@fortawesome/fontawesome-common-types';
 
 import './WrappedInput.scss';
 interface IOnKeyUp {
@@ -16,7 +16,7 @@ interface IProps {
   invalid: boolean;
   onKeyUp?: IOnKeyUp;
   onFocus?: IOnFocus;
-  icon?: string;
+  icon?: IconName;
   autoFocus?: boolean;
 }
 
@@ -35,7 +35,7 @@ const WrappedInput = React.forwardRef((props: IProps, ref?: React.Ref<HTMLInputE
       />
       <label htmlFor={props.name}>{props.name}</label>
       { props.icon &&
-        <FontAwesomeIcon icon={faEnvelope} className="icon" />
+        <FontAwesomeIcon icon={props.icon} className="icon" />
       }
     </span>
   );
