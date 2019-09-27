@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.scss';
+import './LoginPage.scss';
 import LoginForm from '../LoginForm';
 
-const App: React.FC = () => {
+const LoginPage: React.FC = () => {
   return (
     <React.Fragment>
       <div className="top-banner">
@@ -13,4 +13,4 @@ const App: React.FC = () => {
   );
 }
 
-export default App;
+export default LoginPage;
