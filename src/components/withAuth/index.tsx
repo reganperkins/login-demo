@@ -6,9 +6,9 @@ interface IState {
   redirect: boolean;
 }
 
-export default function withAuth(ComponentToProtect: any) {
+export default function withAuth(ComponentToProtect: React.ReactType) {
   return class extends React.Component<{}, IState> {
-    constructor(props: any) {
+    constructor(props: {}) {
       super(props);
       this.state = {
         loading: true,
@@ -18,13 +18,12 @@ export default function withAuth(ComponentToProtect: any) {
 
     componentDidMount() {
       fetch('/checkToken')
-        .then(res => {
+        .then((res: any) => {
           if (res.status === 200) {
             this.setState({ loading: false });
           } else {
-            // const error = new Error(res.error);
-            // throw error;
-            throw 'issue in withAuth'
+            const error = new Error(res.error);
+            throw error;
           }
         })
         .catch(err => {

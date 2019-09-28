@@ -30,23 +30,6 @@ app.get('/ping', function (req, res) {
  return res.send('pong');
 });
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.post('/api/register', function(req, res) {
-  const { email, password } = req.body;
-  const user = new User({ email, password });
-  user.save(function(err) {
-    if (err) {
-      res.status(500)
-        .send("Error registering new user please try again.");
-    } else {
-      res.status(200).send("Welcome to the club!");
-    }
-  });
-});
-
 app.post('/api/authenticate', function(req, res) {
   const { email, password } = req.body;
   User.findOne({ email }, function(err, user) {
@@ -75,7 +58,6 @@ app.post('/api/authenticate', function(req, res) {
           });
         } else {
           // Issue token
-          console.log('issued TOKEN!')
           const payload = { email };
           const token = jwt.sign(payload, secret, {
             expiresIn: '1h'
