@@ -13,15 +13,10 @@ const LoginForm: React.SFC<RouteComponentProps> = (props) => {
   const emailInput = React.createRef<HTMLInputElement>();
   const passwordInput = React.createRef<HTMLInputElement>();
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  function authenticate() {
     let email = get(emailInput, 'current.value');
     const password = get(passwordInput, 'current.value');
-    if (!email || !password) {
-      setInvalidFields(true);
-      setSubmitSuccess(false);
-      return false;
-    }
+
     fetch('/api/authenticate', {
       method: 'POST',
       body: JSON.stringify({
@@ -34,12 +29,10 @@ const LoginForm: React.SFC<RouteComponentProps> = (props) => {
     })
     .then((res: any) => {
       if (res.status === 200) {
-        setInvalidFields(false);
-        setSubmitSuccess(true);
+        setFormIsValid(true);
         setTimeout(() => props.history.push('/'), 600);
       } else {
-        setInvalidFields(true);
-        setSubmitSuccess(false);
+        setFormIsValid(false);
         const error = new Error(res.error);
         throw error;
       }
@@ -48,6 +41,22 @@ const LoginForm: React.SFC<RouteComponentProps> = (props) => {
       console.error(err);
       setInvalidFields(true);
     });
+  }
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    let email = get(emailInput, 'current.value');
+    const password = get(passwordInput, 'current.value');
+    if (!email || !password) {
+      setFormIsValid(false);
+      return false;
+    }
+    authenticate();
+  }
+
+  function setFormIsValid(valid: boolean) {
+    setInvalidFields(!valid);
+    setSubmitSuccess(valid);
   }
 
   const handleKeyUp = () => {

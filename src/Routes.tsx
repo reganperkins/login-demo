@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import LoginPage from './components/LoginPage';
